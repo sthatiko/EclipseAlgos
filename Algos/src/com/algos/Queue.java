@@ -36,7 +36,7 @@ public class Queue<T> {
 			element = (T)array[front];
 			array[front]=null;
 			front = (front+1)%capacity;
-		}
+		} 
 		return element;
 	}
 	
