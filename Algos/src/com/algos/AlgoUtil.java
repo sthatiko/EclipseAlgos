@@ -22,7 +22,7 @@ public class AlgoUtil {
 				System.out.print("->");
 			node = node.next;
 		}
-		System.out.println("Printing Done");
+		System.out.println("Printing Done!!");
 	}
 	
 	public static <T> SLLNode<T> createSLL(T[] values){		
