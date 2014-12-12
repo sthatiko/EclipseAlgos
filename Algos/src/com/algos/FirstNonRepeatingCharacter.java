@@ -17,7 +17,7 @@ public class FirstNonRepeatingCharacter {
 		int charIndex =0;
 		for (char c:  ss.toCharArray()) {
 			if(++alphabetCount[c-'a']==1){
-				alphabets[charIndex++]=c;
+				alphabets[charIndex++]=c; 
 			}
 		}
 		for(char c: alphabets){
