@@ -98,8 +98,8 @@ public class TernarySearchTree {
 	}
 	
 	public static void main(String[] args) {
-		TernarySearchTree m = new TernarySearchTree("TinyW.txt");
-		System.out.println(m.words.size());
+		TernarySearchTree m = new TernarySearchTree("dictionary.txt");
+		System.out.println("Number of words in dictionary : "+m.words.size());
 		boolean result = false;
 		for(String word:m.words){
 			m.deleteWord(word);
