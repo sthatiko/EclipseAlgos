@@ -11,8 +11,8 @@ public class StackWithQueues<T> {
 		q2 = new Queue<T>(25);
 	}
 	
-	public T push(T element){
-		return q1.enqueue(element);
+	public void push(T element){
+		 q1.enqueue(element);
 	}
 
 	public T pop(){

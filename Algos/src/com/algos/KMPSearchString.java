@@ -70,6 +70,7 @@ class KMPSearchString {
 					 * couldn't extend the Longest Prefix(LP) found so far, 
 					 * but there could be a sub prefix within this LP. 
 					 * lps[len-1] returns the length of longest sub prefix of LP.
+					 * len-- would be incorrect as len-- may not be actually a prefix which is suffix
 					 */
 				}
 			}

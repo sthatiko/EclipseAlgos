@@ -8,8 +8,8 @@ public class StackWithQueue<T> {
 		q  = new Queue<T>();
 	}
 	
-	public T push(T element){
-		return q.enqueue(element);
+	public void push(T element){
+		q.enqueue(element);
 	}
 	
 	public T pop(){

@@ -2,17 +2,133 @@ package com.algos;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
 	
 	static SLLNode<Integer>  head = AlgoUtil.getSampleSLL();
 	
 	public static void main(String[] args){
-		printPermutations("","ABCD");
+		
+		indexSort(new int[]{50, 40, 70, 60, 90}, new int[]{3,  0,  4,  1,  2});
 	}
 	
+	public static void indexSort(int[] arr, int[] index){
+		int length = index.length,x;
+		for(i =0; i< length; i++){
+			x=arr[index[i]];
+			arr[index[i]] = index[i];
+			index[i]=x;
+		}
+		System.out.println(Arrays.toString(arr));
+		System.out.println(Arrays.toString(index));
+	}
+	
+	public static int[][] pyramidMatrix(int N) {
+		  int[][] M = new int[N][N];
+		  for(int i=0,x;i<N;i++){
+			  x=i;
+			  if(i>=N/2)x=N-1-i;
+			  for(int j=0,y;j<N;j++){
+				  y=j;
+				  if(j>=N/2)y=N-1-j;
+				  M[i][j]=1+(x>y?y:x);
+		    }
+		  }
+		  return M;
+	}
+	
+	public static int[][] pyramidMatrix1(int N) {
+		  int[][] M = new int[N][N];
+		  for(int i=0;i<(N+1)/2;i++){
+			  for(int j=0;j<(N+1)/2;j++){
+				  M[i][j]=M[i][N-1-j]=M[N-1-i][N-1-j]=M[N-1-i][j]=(i<j)?i+1:j+1;
+		    }
+		  }
+		  return M;
+	}
+	
+	static int toDec(String roman){
+		int m[]=new int[1001],p=0,s=0;
+		m['I']=1;m['V']=5;m['X']=10;m['L']=50;m['C']=100;m['D']=500;m['M']=1000;
+		for(int i :  roman.getBytes() ){
+			if(m[i]<=p)s+=m[i];
+			else s=s+m[i]-2*p;
+			p=m[i];
+		}
+		return s;
+	}
+	
+	static String toRoman(int n){		
+		String s = "";
+		if(n==0) return s;
+		int m[]=new int[1001],r=0,L[]={'I','V','X','L','C','D','M'},i;
+		m['I']=1;m['V']=5;m['X']=10;m['L']=50;m['C']=100;m['D']=500;m['M']=1000;
+		for(i =6;i>=0;i--){
+			r=n/m[L[i]];
+			if(r>0){
+				if(r>3){
+					if(s.length()>0 && s.charAt(s.length()-1)==L[i+1] && i<4&&2*m[L[i+1]]==m[L[i+2]])
+						s=""+s.substring(0,s.length()-1)+(char)L[i]+""+(char)L[i+2];
+					else s=s+(char)L[i]+(char)L[i+1];
+				}
+				else
+					for(;r>0;r--)s+=(char)L[i];
+				n=n%m[L[i]];
+			}
+		}				
+		return s;
+	}
+	
+	static String prime_encryption(String msg) {
+		int p[] = new int[160];
+  		String s = "";
+		for (int i = 2; i < 160; i++)
+			for (int j = 2; j * i < 160; j++)
+				p[j * i] = 1;		
+		for (int c : msg.getBytes()) 			
+			if (c < 33) s += ". ";
+         	else{
+              	int n = c>96?c - 96:c<47?37:c-21,z=2;
+	            for (; n > 0;  )
+    	            if (p[z++]<1) n--; 
+			    s += z - 1 + " ";
+          	}
+		return s.trim();
+	}
+
+	
+
+	int f(int n){
+	 return n==0?1:n*f(n-1); 
+	}
+	
+	static int x,B,r;
+	
+	static int MMI(int A, int N) {
+	  x=A%N;
+	  if(x==1)return 1;
+	  if(N==1||N%A==0) return -1;
+	  B=N/x+1;
+	  r=(x*B)%N;
+	  if(r==1)return B;
+	  B=2*N/A+1;
+	  if((x*B)%N==1) return B;
+	  return -1;
+	}
+
+	
+	static int w[][],i,j;
+	static int walksNumber(int x, int y) {
+		  	w= new int[x+1][y+1];		
+			for(;i<=x;i++)
+				for(j=0;j<=y;j++)
+	                w[i][j]=i*j==0?1:i==j?0:w[i][j-1]+w[i-1][j];
+			return w[x][y]; 
+	}
 	
 	
 	private static <T> SLLNode<T> reverseSLL(SLLNode<T> head){
@@ -303,31 +419,7 @@ public class Main {
 	}
 	
 	
-	/**
-	 * iterative solution for inorder traversal
-	 * @param head
-	 */
-	public static void printInOrder(BinaryTreeNode head){
-		if(head==null) return;
-		Stack<BinaryTreeNode> stack = new Stack<BinaryTreeNode>(25);
-		while(head!=null){
-			if(head.leftNode!=null){//keep pushing to stack until you reach a node without leftnode
-				stack.push(head);
-				head = head.leftNode;
-			}
-			else{
-				System.out.print(head.data+"-");//print it say x
-				if(head.rightNode!=null)head=head.rightNode;//continue with right subtree of x
-				else {//when you are done with right sub tree of x
-					head = stack.pop();//deal with parent element of x say y
-					if(head!=null){
-						System.out.print(head.data+"-"); //print y
-						head = head.rightNode;//deal with right subtree of y
-					}
-				}
-			}
-		}
-	}
+	
 	
 	/**
 	 * print all permutations of a given string.

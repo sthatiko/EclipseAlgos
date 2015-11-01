@@ -123,11 +123,19 @@ public class TernarySearchTree {
 		return matches;
 	}
 	
-	private void getMatches(Node start, List<String> matches, String prefix){
-		if(start.endOfString)matches.add(prefix);
-		if(start.leftPtr!=null)getMatches(start.leftPtr,matches,prefix.substring(0, prefix.length() -1)+start.leftPtr.data);
-		if(start.eqlPtr!=null)getMatches(start.eqlPtr,matches,prefix+start.eqlPtr.data);
-		if(start.rightPtr!=null)getMatches(start.rightPtr,matches,prefix.substring(0, prefix.length() -1)+start.rightPtr.data);		
+	private void getMatches(Node start, List<String> matches, String prefix) {
+		if (start.endOfString)
+			matches.add(prefix);
+		if (start.leftPtr != null)
+			getMatches(start.leftPtr, matches,
+					prefix.substring(0, prefix.length() - 1)
+							+ start.leftPtr.data);
+		if (start.eqlPtr != null)
+			getMatches(start.eqlPtr, matches, prefix + start.eqlPtr.data);
+		if (start.rightPtr != null)
+			getMatches(start.rightPtr, matches,
+					prefix.substring(0, prefix.length() - 1)
+							+ start.rightPtr.data);
 	}
 	
 	public static void main(String[] args) {

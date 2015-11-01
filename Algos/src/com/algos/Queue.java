@@ -4,59 +4,70 @@ package com.algos;
 
 public class Queue<T> {
 	
-	private Object[] array;
-	private int front=-1,rear=0;
+	private T[] array;
+	private int front=-1,rear=-1;
 	private final int capacity;
 	
 
+	@SuppressWarnings("unchecked")
 	public Queue(int capacity){
-		array = new Object[capacity];
+		array = (T[])new Object[capacity];
 		this.capacity = capacity;
 	}
 	
 	public Queue(){
-		this(25);
+		this(29);
 	}	
 
 	
-	public T enqueue(T element){
-		if(!isFull()){
-			array[rear]=element;
-			rear = (rear+1)%capacity;
-			if(front==-1)front=0;//first element inserted into queue so front should point first element.
-			return element;
-		}
-		return null;
+	public void enqueue(T element){
+		   if (isFull()) {
+	            throw new IllegalStateException("Queue is full");
+	        } else if (isEmpty()) {
+	            front++;
+	            rear++;
+	            array[rear] = element;
+	        } else {
+	            rear=(rear+1)%capacity;
+	            array[rear] = element;
+	        }
 	}
 	
-	@SuppressWarnings("unchecked")
 	public T dequeue(){
 		T element=null;
-		if(!isEmpty()){
+		if(isEmpty()){
+			throw new IllegalStateException("Queue is empty");
+		}
+		else if(front==rear){
+			element = (T)array[front];
+			array[front]=null;
+			front = -1;
+			rear = -1;
+		}else{
 			element = (T)array[front];
 			array[front]=null;
 			front = (front+1)%capacity;
-		} 
+		}		
 		return element;
 	}
 	
 	public boolean isFull(){
-		return getCount()==capacity;
+		return (rear+1)%capacity==front;
 	}
 	
 	public boolean isEmpty(){
-		return getCount()==0;
+		return (front==-1 && rear ==-1);
 	}
 	
 	public int getCount(){
-		if(front==-1) return 0;
-		else if(rear>=front) return rear-front;
+		if(isEmpty()) return 0;
+		else if(rear>=front) return rear-front+1;
+		else if(isFull()) return capacity;
 		else return capacity-front+rear;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public T front(){
 		if(!isEmpty()) return (T)array[front];
-		else return null;
+		else throw new IllegalStateException("Queue is empty");
 	}
 }

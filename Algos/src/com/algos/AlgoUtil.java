@@ -145,7 +145,7 @@ public class AlgoUtil {
 		BinaryTreeNode temp;
 		if(root==null) 
 			return height;
-		Queue<BinaryTreeNode> q = new Queue<BinaryTreeNode>( 15);
+		Queue<BinaryTreeNode> q = new Queue<BinaryTreeNode>( root.getSize());
 		q.enqueue(root);
 		while(!q.isEmpty()){
 			height++;
@@ -198,4 +198,101 @@ public class AlgoUtil {
 		reverseQ(q);
 		q.enqueue(e);
 	}
+	
+	
+	
+	public static boolean isLeaf(BinaryTreeNode node){
+		return node.leftNode==null && node.rightNode==null;
+	}
+	
+	public static boolean hasLeft(BinaryTreeNode node){
+		return node.leftNode!=null;
+	}
+	
+	public static boolean hasRight(BinaryTreeNode node){
+		return node.rightNode!=null;
+	}
+	
+	public static BinaryTreeNode getCompleteBinaryTree(){
+		BinaryTreeNode root = new BinaryTreeNode(1);
+		root.leftNode = new BinaryTreeNode(2);
+		root.rightNode = new BinaryTreeNode(3);
+		root.leftNode.leftNode = new BinaryTreeNode(4);
+		root.leftNode.rightNode = new BinaryTreeNode(5);
+		root.rightNode.leftNode = new BinaryTreeNode(6);
+		return root;
+	}
+	
+	public static void heapify(int[] arr, int i, int heapSize){
+		int left = 2*i,  right = 2*i+1, max=i;
+		if(left<heapSize && arr[left]>arr[max]){
+			max = left;
+		}
+		if (right<heapSize && arr[right]>arr[max]){
+			max = right;
+		}
+		if(max!=i){
+			int temp =arr[i];
+			arr[i] = arr[max];
+			arr[max] = temp;
+			heapify(arr,max,heapSize);
+		}
+	}
+	
+	public static void buildHeap(int[] arr){
+		int size = arr.length;
+		for(int i=size/2;i>=0;i--){
+			heapify(arr,i,size);
+		}
+	}
+	
+	public static void heapSort(int[] arr){
+		//http://www.cs.umd.edu/~meesh/351/mount/lectures/lect13-heapsort.pdf
+		buildHeap(arr);
+		int size =arr.length,max;
+		while(size>=2){//keep sorting until the number of unsorted elements >=2
+			max = arr[0];
+			arr[0] = arr[size-1];
+			arr[size-1]=max;
+			size--;
+			heapify(arr,0,size);
+		}
+	}
+	
+	/**
+	 * http://algs4.cs.princeton.edu/23quicksort/
+	 * @param arr
+	 */
+	public static void quickSort(int[] arr){
+		quickSort(0,arr.length -1,arr);
+	}
+	
+	public static void quickSort(int l, int r, int[] arr){
+		if(l>=r) return;
+		int q = partition(l,r,arr);
+		quickSort(l,q-1,arr);
+		quickSort(q+1,r,arr);
+	}
+	
+	public static int partition(int lo, int hi, int[] arr){
+		int pIndex = lo+(hi-lo)/2;//selecting mid as pivot. Can be chosen randomly also.
+		int p = arr[pIndex];
+		swap(lo,pIndex,arr);
+		int i=lo, j=hi+1;
+		while(true){
+			while(arr[++i]<p)if(i==hi)break;
+			while(arr[--j]>p)if(j==lo)break;
+			if(i>=j)break;
+			swap(i,j,arr);
+		}
+		swap(j,lo,arr);
+		return j;
+	}
+	
+	public static void swap(int i, int j , int[] arr){
+		int t = arr[i];
+		arr[i] = arr[j];
+		arr[j] =t;
+	}
+	
 }

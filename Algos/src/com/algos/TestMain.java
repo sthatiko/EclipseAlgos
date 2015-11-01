@@ -5,6 +5,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 class TestMain {
+	 
+	 static int[] sortedRotatedE = {8,9,10,11,12,1,2,3,4,5,6,7};
+	 static int[] sortedRotatedO = {8,9,10,11,12,13,1,2,3,4,5,6,7};
+	 static int[] sortedAE = {1,2,3,4,5,6,7,8,9,10,11,12};
+	 static int[] sortedAO = {1,2,3,4,5,6,7,8,9,10,11,12,13};
+	 static int[] sortedDE = {12,11,10,9,8,7,6,5,4,3,2,1};
+	 static int[] sortedDO = {13,12,11,10,9,8,7,6,5,4,3,2,1};
 	
 	 public static void main(String[] args) {
 		 List<Integer> input = new ArrayList<Integer>();
@@ -12,10 +19,50 @@ class TestMain {
 		 input.add(2);
 		 input.add(3);
 		 input.add(4);
-		 List op = getAllSubsets(input);
-		 System.out.println(op);
+		 //List op = getAllSubsets(input);
+//		 for(int i=0;i<sortedAO.length;i++){
+//			 rotateArray(sortedAO);
+//			 System.out.println(findMin(sortedAO,0,sortedAO.length-1));
+//		 }
+		 System.out.println(numberOfCarries(99,99,0));
 	}
 	 
+	static int numberOfCarries(int a, int b, int c) {
+		if((a|b)>0){
+			 c+=a%10+b%10;
+		   return (c/=10)+numberOfCarries(a/10,b/10,c);
+		  }
+		  return 0;
+		}
+	
+	/**
+	 * for sorted array rotated unknown number of times find the min 
+	 * http://www.geeksforgeeks.org/find-minimum-element-in-a-sorted-and-rotated-array/
+	 * http://stackoverflow.com/questions/5946155/searching-a-element-in-a-array-which-is-rotated-n-times
+	 * @param arr
+	 * @param lo
+	 * @param hi
+	 * @return
+	 */
+	public static int findMin(int[] arr, int lo, int hi){ 
+		if(hi<lo)return arr[0];
+		if(hi==lo) return arr[lo];
+		int mid = lo+ (hi-lo)/2;
+		if(mid>lo && arr[mid]<arr[mid-1]) return  arr[mid];
+		if(mid<hi && arr[mid]>arr[mid+1]) return  arr[mid+1];
+		if(arr[mid]<arr[hi])return  findMin(arr,lo,mid-1);
+		return findMin(arr,mid+1,hi);	
+	}
+	
+	public static void rotateArray(int[] arr){
+		int len = arr.length;
+		if(len<=1)return;
+		int temp = arr[len-1];
+		for(int i=len-1;i>=1;i--){
+			arr[i] = arr[i-1];
+		}
+		arr[0]=temp;
+	}
 	public static List<ArrayList<Integer>> getAllSubsets(List<Integer> input){
 		ArrayList<ArrayList<Integer>> allSubSets = new ArrayList<ArrayList<Integer>>();
 		allSubSets.add(new ArrayList<Integer>());
