@@ -1,7 +1,5 @@
 package com.algos;
 
-import java.util.Formatter;
-
 public class AlgoUtil {
 	
 	public static int[][] getSampleMatrix(){

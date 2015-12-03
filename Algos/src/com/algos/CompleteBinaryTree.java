@@ -7,7 +7,7 @@ public class CompleteBinaryTree {
 	Queue<BinaryTreeNode> q;
 	
 	public static void main(String[] args){
-		int[] arr =  BinaryTreeUtil.getRandomArray(14);
+		int[] arr =  ArrayUtil.getRandomArray(14);
 		//CompleteBinaryTree cbt = new CompleteBinaryTree(arr);
 		System.out.print(isCompleteBinaryTree(BinaryTreeUtil.getRandomBST(1)));
 	}
@@ -48,7 +48,7 @@ public class CompleteBinaryTree {
 	}
 	
 	public static BinaryTreeNode getSampleTree(int size){
-		int[] arr =  BinaryTreeUtil.getRandomArray(25);
+		int[] arr =  ArrayUtil.getRandomArray(25);
 		CompleteBinaryTree cbt = new CompleteBinaryTree(arr);
 		return cbt.root;
 	}
