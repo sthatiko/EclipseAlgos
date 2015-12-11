@@ -1,4 +1,7 @@
-package com.algos;
+package com.algos.binarytree;
+
+import com.algos.AlgoUtil;
+import com.algos.BinaryTreeNode;
 
 public class BinarySearchTree {
 	private int[] A;
