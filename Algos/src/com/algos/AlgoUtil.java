@@ -2,6 +2,10 @@ package com.algos;
 
 public class AlgoUtil {
 	
+	public static int getRandomInteger(){
+		return (int)(Math.random()*(100));
+	}
+	
 	public static int[][] getSampleMatrix(){
 		int[][] matrix = new int[][]{
 				{1,2,-1,-4,-20},

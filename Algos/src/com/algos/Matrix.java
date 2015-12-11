@@ -168,5 +168,18 @@ public class Matrix {
 		}
 		System.out.println();
 	}
+	
+	public static void printMatrix(boolean[][] M){
+		int R = M.length;
+		int C = M[0].length;
+		for(int i=0;i<R;i++){
+			System.out.print("[");
+			for(int j=0;j<C;j++){
+				System.out.print(String.format(" %1$" + 3 + "s", M[i][j]));
+			}
+			System.out.println(" ]");
+		}
+		System.out.println();
+	}
 
 }
