@@ -23,7 +23,7 @@ public class EqualSumSubsets {
 		boolean[][] DP = new boolean[A.length][sum + 1];
 
 		for (int i = 0; i < A.length; i++) {
-			DP[i][0] = true; // empty subset has sum 0
+			DP[i][0] = true; // empty osubset has sum 0
 		}
 		for (int j = 0; j <= sum / 2; j++) {
 			DP[0][j] = (j == A[0] ? true : false);

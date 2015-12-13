@@ -2,6 +2,8 @@ package com.algos;
 
 import java.util.Arrays;
 
+import com.algos.binarytree.BinaryTreeNode;
+
 public class BiTreeVerticalSum {
 	public static int left=0,  right=0;
 	public static int[] sums;
@@ -52,7 +54,7 @@ public class BiTreeVerticalSum {
 	public static void calculateSums(BinaryTreeNode root,int hd){
 		if(root==null) return;
 		calculateSums(root.leftNode,hd-1);
-		sums[hd+left] +=root.data;
+		sums[hd+left] +=root.data; 
 		calculateSums(root.rightNode,hd+1);
 	}
 	

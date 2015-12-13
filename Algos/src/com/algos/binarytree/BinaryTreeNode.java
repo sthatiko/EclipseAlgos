@@ -1,9 +1,13 @@
-package com.algos;
+package com.algos.binarytree;
+
+import com.algos.AlgoUtil;
+import com.algos.Queue;
+import com.algos.Stack;
 
 public class BinaryTreeNode {
-	int data;
-	BinaryTreeNode leftNode;
-	BinaryTreeNode rightNode;
+	public int data;
+	public BinaryTreeNode leftNode;
+	public BinaryTreeNode rightNode;
 
 	public BinaryTreeNode(int data, BinaryTreeNode left, BinaryTreeNode right) {
 		this.data = data;

@@ -1,7 +1,7 @@
 package com.algos.binarytree;
 
 import com.algos.AlgoUtil;
-import com.algos.BinaryTreeNode;
+import com.algos.ArrayUtil;
 
 public class BinarySearchTree {
 	private int[] A;
@@ -42,6 +42,38 @@ public class BinarySearchTree {
 	
 	public void printBST(){
 		AlgoUtil.printBinaryTree(root);
+	}
+	
+	public static boolean search(BinaryTreeNode root, int element){
+		if(root.data==element) return true;
+		else if(element < root.data) return  search(root.leftNode,element);
+		else return search(root.rightNode,element);
+	}
+	
+	/**
+	 * Given an integer sum, find if there are two integers in bst whose sum is sum.
+	 *  
+	 * #orig
+	 */
+	public static boolean twoElementsWithSum(BinaryTreeNode bstnode, int sum){
+		while(bstnode.data>=sum)bstnode = bstnode.leftNode;
+		int b=sum - bstnode.data;
+		if(b>bstnode.data && search(bstnode.rightNode,b)){
+			System.out.print(bstnode.data + " " + b);
+			return true;
+		}
+		else if(search(bstnode.leftNode,b)){
+			System.out.print(bstnode.data + " " + b);
+			return true;
+		}
+		return twoElementsWithSum(bstnode.leftNode,sum) || twoElementsWithSum(bstnode.rightNode,sum);
+	}
+	
+	public static void main(String[] args){
+		int[] A = ArrayUtil.getRandomArray(17);
+		BinarySearchTree bst = new BinarySearchTree(A);
+		int sum = A[0]+A[8];
+		twoElementsWithSum(bst.getBST(),sum);
 	}
 	
 }

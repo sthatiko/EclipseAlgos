@@ -1,5 +1,7 @@
 package com.algos;
 
+import com.algos.binarytree.BinaryTreeNode;
+
 public class CompleteBinaryTree {
 	
 	int[] elements;
